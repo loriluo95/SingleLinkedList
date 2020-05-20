@@ -140,12 +140,9 @@ public class SingleLinkedList<E> {
             return curr.e;
         }
     }
-
+
     public void setFirst(E e) {
-        ListNode nextNode = dummyHead.next.next;
-        ListNode newNode = new ListNode(e);
-        dummyHead.next = newNode;
-        newNode.next = nextNode;
+        dummyHead.next.e = e;
     }
 
     public void setLast(E e) {
