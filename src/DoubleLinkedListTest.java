@@ -3,11 +3,11 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class SingleLinkedListTest {
-    SingleLinkedList<Integer> linkedList;
+class DoubleLinkedListTest {
+    DoubleLinkedList<Integer> linkedList;
     @Test
     public void testAddFirst() {
-        linkedList = new SingleLinkedList<>();
+        linkedList = new DoubleLinkedList<>();
         linkedList.add(1,0);
         assertEquals(1, linkedList.getFirst());
         linkedList.addFirst(3);
@@ -17,7 +17,7 @@ class SingleLinkedListTest {
 
     @Test
     public void testAddLast() {
-        linkedList = new SingleLinkedList<>();
+        linkedList = new DoubleLinkedList<>();
         linkedList.add(1,0);
         assertEquals(1, linkedList.getFirst());
         linkedList.addLast(2);
@@ -28,7 +28,7 @@ class SingleLinkedListTest {
 
     @Test
     public void testGetFirst() {
-        linkedList = new SingleLinkedList<>();
+        linkedList = new DoubleLinkedList<>();
         linkedList.addFirst(1);
         linkedList.addFirst(2);
         linkedList.addFirst(3);
@@ -37,7 +37,7 @@ class SingleLinkedListTest {
 
     @Test
     public void testGetLast() {
-        linkedList = new SingleLinkedList<>();
+        linkedList = new DoubleLinkedList<>();
         linkedList.addFirst(1);
         linkedList.addFirst(2);
         linkedList.addFirst(3);
@@ -46,7 +46,7 @@ class SingleLinkedListTest {
 
     @Test
     public void testRemoveFirst() {
-        linkedList = new SingleLinkedList<>();
+        linkedList = new DoubleLinkedList<>();
         linkedList.addFirst(1);
         linkedList.addFirst(2);
         linkedList.addFirst(3);
@@ -58,7 +58,7 @@ class SingleLinkedListTest {
 
     @Test
     public void testRemoveLast() {
-        linkedList = new SingleLinkedList<>();
+        linkedList = new DoubleLinkedList<>();
         linkedList.addFirst(1);
         linkedList.addFirst(2);
         linkedList.addFirst(3);
@@ -70,7 +70,7 @@ class SingleLinkedListTest {
 
     @Test
     public void testRemove() {
-        linkedList = new SingleLinkedList<>();
+        linkedList = new DoubleLinkedList<>();
         linkedList.addFirst(1);
         linkedList.addFirst(2);
         linkedList.addFirst(3);
@@ -81,7 +81,8 @@ class SingleLinkedListTest {
 
     @Test
     public void testEmpty() {
-        linkedList = new SingleLinkedList<>();
+        linkedList = new DoubleLinkedList<>();
         assertTrue(linkedList.isEmpty());
     }
+
 }

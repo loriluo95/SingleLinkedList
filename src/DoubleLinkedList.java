@@ -26,25 +26,33 @@ public class DoubleLinkedList<E> {
     public DoubleLinkedList() {
         size = 0;
         dummyHead = new ListNode();
-        tail = dummyHead;
+        tail = new ListNode();
+        dummyHead.next = tail;
+        tail.prev = dummyHead;
     }
 
     public void addFirst(E e) {
         size++;
         ListNode oldHead = dummyHead.next;
         ListNode newHead = new ListNode(e);
-        newHead.prev = null;
-        dummyHead.next = newHead;
-        newHead.next = oldHead;
         if (oldHead == null) {
-            tail = newHead;
+            tail.prev = newHead;
         }
+        newHead.prev = dummyHead;
+        newHead.next = oldHead;
+        dummyHead.next = newHead;
+        oldHead.prev = newHead;
+
     }
 
     public void addLast(E e) {
         size++;
-        tail.next = new ListNode(e);
-        tail = tail.next;
+        ListNode prev = tail.prev;
+        ListNode newNode = new ListNode(e);
+        prev.next = newNode;
+        newNode.prev = prev;
+        newNode.next = tail;
+        tail.prev = newNode;
     }
 
     private void isValidIdx(int idx) {
@@ -69,30 +77,28 @@ public class DoubleLinkedList<E> {
             ListNode inseredtNode = new ListNode(e);
             prevNode.next = inseredtNode;
             inseredtNode.next = nextNode;
+            inseredtNode.prev = prevNode;
+            nextNode.prev = inseredtNode;
         }
     }
 
     public void removeFirst() {
-        if(dummyHead.next == null) return;
+        if(dummyHead.next == tail) return;
         size--;
         ListNode newHead = dummyHead.next.next;
+        if (newHead == null) {
+            tail.prev = dummyHead;
+        }
+        newHead.prev = dummyHead;
         dummyHead.next = newHead;
         ListNode deletedNode = dummyHead.next;
         deletedNode.next = null;
-        if (newHead == null) {
-            tail = dummyHead;
-        }
     }
 
     public void removeLast() {
-        if(tail == dummyHead) return;
+        if(tail.prev == dummyHead) return;
         size--;
-        ListNode curr = dummyHead;
-        while (curr != null) {
-            curr = curr.next;
-        }
-        curr.next = null;
-        tail = curr;
+        tail.prev = tail.prev.prev;
     }
     public void remove(int idx) {
         isValidIdx(idx);
@@ -108,12 +114,14 @@ public class DoubleLinkedList<E> {
             }
             ListNode deletedNode = prevNode.next;
             prevNode.next = deletedNode.next;
+            deletedNode.next.prev = prevNode;
             deletedNode.next = null;
+            deletedNode.prev = null;
         }
     }
 
     public E getFirst() {
-        if (dummyHead.next == null) {
+        if (dummyHead.next == tail) {
             return null;
         } else {
             return dummyHead.next.e;
@@ -121,10 +129,10 @@ public class DoubleLinkedList<E> {
     }
 
     public E getLast() {
-        if (tail == null) {
+        if (tail.prev == dummyHead) {
             return null;
         } else {
-            return tail.e;
+            return tail.prev.e;
         }
     }
 
@@ -142,20 +150,6 @@ public class DoubleLinkedList<E> {
             return curr.e;
         }
     }
-
-//    public void setFirst(E e) {
-//        ListNode nextNode = dummyHead.next.next;
-//        ListNode newNode = new ListNode(e);
-//        dummyHead.next = newNode;
-//        newNode.next = nextNode;
-//    }
-//
-//    public void setLast(E e) {
-//        ListNode nextNode = dummyHead.next.next;
-//        ListNode newNode = new ListNode(e);
-//        dummyHead.next = newNode;
-//        newNode.next = nextNode;
-//    }
 
     public int size() {
         return size;
