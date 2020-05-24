@@ -86,13 +86,14 @@ public class SingleLinkedList<E> {
         if(tail == dummyHead) return;
         size--;
         ListNode curr = dummyHead;
-        while (curr != null) {
+        for (int i = 0; i < size; i++){
             curr = curr.next;
         }
         curr.next = null;
         tail = curr;
     }
-     public void remove(int idx) {
+
+    public void remove(int idx) {
         isValidIdx(idx);
         if (idx == 0) {
             removeFirst();
@@ -108,15 +109,15 @@ public class SingleLinkedList<E> {
             prevNode.next = deletedNode.next;
             deletedNode.next = null;
         }
-     }
+    }
 
-     public E getFirst() {
+    public E getFirst() {
         if (dummyHead.next == null) {
             return null;
         } else {
             return dummyHead.next.e;
         }
-     }
+    }
 
     public E getLast() {
         if (tail == null) {
@@ -140,14 +141,14 @@ public class SingleLinkedList<E> {
             return curr.e;
         }
     }
-
-    public void setFirst(E e) {
-        dummyHead.next.e = e;
-    }
 
-    public void setLast(E e) {
-        tail.e = e;
-    }
+//    public void setFirst(E e) {
+//        dummyHead.next.e = e;
+//    }
+//
+//    public void setLast(E e) {
+//        tail.e = e;
+//    }
 
     public int size() {
         return size;
